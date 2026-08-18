@@ -1,3 +1,13 @@
+"""
+⚠ 이 스크립트는 .xlsx를 읽습니다. 그 파일의 조도 열은 GDP 열과 어긋나 있어
+   여기서 나오는 R^2(약 0.877)는 조도의 설명력이 아닙니다.
+   조도를 모형에서 빼도 R^2가 같습니다. 값을 만드는 것은 인구·도시인구입니다.
+
+   검증된 결과는 reproduce.py를 쓰세요 (.sav 기준, ln-ln 단순회귀 R^2 = 0.819, N = 791).
+   자세한 내용은 README의 「7. 데이터 파일 주의사항」 참고.
+   이 파일은 당시 작업 기록으로 남겨둡니다.
+"""
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt

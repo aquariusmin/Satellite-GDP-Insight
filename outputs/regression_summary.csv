@@ -1,0 +1,4 @@
+model,r_squared,adj_r_squared,n
+simple: ln(GDP) ~ ln(Brightness),0.8189,0.8187,791
+main effects: BC + UPC + EAC,0.8538,0.8532,786
+moderation: + int_B_UP + int_B_EA,0.8623,0.8614,786
