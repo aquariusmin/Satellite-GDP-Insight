@@ -35,8 +35,8 @@ df_clean = df.dropna(subset=cols).copy()
 df_clean.loc[:, 'log_GDP'] = np.log1p(df_clean['GDP'])
 df_clean.loc[:, 'log_brightness'] = np.log1p(df_clean['brightness_sum'])
 
-# 4. 다중 회귀 분석 (보고서의 R2=0.82를 재현하기 위한 모델)
-# 조도뿐만 아니라 인구와 인프라 요인을 함께 고려합니다.
+# 4. 다중 회귀 분석 (초기 기록용)
+# 이 파일은 어긋난 xlsx를 읽으므로 아래 결과는 검증 결과로 사용하지 않습니다.
 X_multi = sm.add_constant(df_clean[['brightness_sum', 'Population', 'Urban_Population', 'Electricity_Access']])
 y_multi = df_clean['GDP']
 model_multi = sm.OLS(y_multi, X_multi).fit()
@@ -53,14 +53,14 @@ sns.regplot(x='log_brightness', y='log_GDP', data=df_clean,
             scatter_kws={'alpha':0.3, 'color':'gray'}, line_kws={'color':'orange'})
 plt.title('야간 조도 vs GDP (로그 변환)')
 
-# (2) 실제값 vs 예측값 시각화 (모델의 설명력 증명)
+# (2) 실제값 vs 적합값 시각화 (초기 기록용)
 plt.subplot(1, 2, 2)
 y_pred = model_multi.predict(X_multi)
 plt.scatter(y_multi, y_pred, alpha=0.3, color='blue')
 plt.plot([y_multi.min(), y_multi.max()], [y_multi.min(), y_multi.max()], 'r--', lw=2)
-plt.title(f'다중 회귀 결과 (R-squared: {model_multi.rsquared:.2f})')
+plt.title(f'다중 회귀 결과 - 초기 xlsx 기준 (R-squared: {model_multi.rsquared:.2f})')
 plt.xlabel('실제 GDP')
-plt.ylabel('예측 GDP')
+plt.ylabel('적합 GDP')
 
 plt.tight_layout()
 plt.savefig('gdp_analysis_final.png', dpi=300)
